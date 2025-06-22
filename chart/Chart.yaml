@@ -1,0 +1,18 @@
+apiVersion: v2
+name: linkerd-monitoring
+description: linkerd-monitoring is an umbrella Helm chart for configuring and deploying a best-practices observability stack powered by Linkerd
+type: application
+version: 0.1.0
+dependencies:
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: ~75.15.0
+  condition: kube-prometheus-stack.enabled
+- name: kube-prometheus-stack-linkerd
+  repository: oci://ghcr.io/alpeb
+  version: ~0.1.0
+  condition: kube-prometheus-stack-linkerd.enabled
+- name: linkerd-dashboard
+  repository: oci://ghcr.io/buoyantio
+  version: ~0.3.0
+  condition: linkerd-dashboard.enabled

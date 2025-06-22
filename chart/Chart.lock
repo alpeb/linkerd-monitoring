@@ -1,0 +1,12 @@
+dependencies:
+- name: kube-prometheus-stack
+  repository: https://prometheus-community.github.io/helm-charts
+  version: 75.15.2
+- name: kube-prometheus-stack-linkerd
+  repository: oci://ghcr.io/alpeb
+  version: 0.1.0
+- name: linkerd-dashboard
+  repository: oci://ghcr.io/buoyantio
+  version: 0.3.0
+digest: sha256:413ad4784d22f618bca9c9369f2acacc8a7f6552b04e2b4331e9f2fb41a93c29
+generated: "2025-08-04T20:45:19.967278813Z"

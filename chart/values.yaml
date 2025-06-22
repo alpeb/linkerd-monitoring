@@ -1,0 +1,54 @@
+kube-prometheus-stack:
+  enabled: true
+
+  prometheus:
+    prometheusSpec:
+      podMonitorSelectorNilUsesHelmValues: false
+      probeSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+      enableRemoteWriteReceiver: true
+      retention: 24h
+      retentionSize: 2GiB
+      storageSpec:
+        emptyDir:
+          medium: Memory
+          sizeLimit: 2Gi
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: Exists
+
+  grafana:
+    enabled: true
+    persistence:
+      enabled: false
+    sidecar:
+      datasources:
+        enabled: true
+        isDefaultDatasource: true
+        uid: prometheus
+      dashboards:
+        label: monitoring-config
+        labelValue: "dashboards"
+
+kube-prometheus-stack-linkerd:
+  enabled: true
+
+  dashboards:
+    enabled: true
+
+  podMonitor:
+    enabled: true
+
+  alertManager:
+    enabled: true
+
+linkerd-dashboard:
+  enabled: true
+  prometheus:
+    enabled: false
+    url: http://linkerd-monitoring-kube-pr-prometheus:9090

@@ -1,0 +1,9 @@
+{{ $.Chart.Name  }} has been installed.
+
+The following components were installed:
+
+{{- range $.Chart.Dependencies }}
+- {{ .Name }}
+{{- end }}
+
+Happy Linkerd'ing!
